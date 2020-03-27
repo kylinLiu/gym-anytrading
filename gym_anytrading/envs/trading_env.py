@@ -28,6 +28,7 @@ class TradingEnv(gym.Env):
 
         self.seed()
         self.df = df
+        self.trials = 10
         self.window_size = window_size
         self.prices, self.signal_features = self._process_data()
         self.shape = (window_size, self.signal_features.shape[1])
