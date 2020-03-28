@@ -24,8 +24,8 @@ class StocksEnv(TradingEnv):
         diff = np.insert(np.diff(prices), 0, 0)
         signal_features = np.column_stack((prices, diff))
 
-        # return prices, signal_features
-        return prices
+        return prices, signal_features
+        # return prices
 
 
     def _calculate_reward(self, action):
