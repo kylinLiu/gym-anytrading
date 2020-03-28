@@ -31,12 +31,13 @@ class TradingEnv(gym.Env):
         self.trials = 10
         self.window_size = window_size
         self.prices, self.signal_features = self._process_data()
-        self.signal_features = self.prices
         self.shape = (window_size, self.signal_features.shape[1])
+        print("shape",self.shape)
 
         # spaces
         self.action_space = spaces.Discrete(len(Actions))
         self.observation_space = spaces.Box(low=-np.inf, high=np.inf, shape=self.shape, dtype=np.float32)
+        print("observation_space",self.shape)
 
         # episode
         self._start_tick = self.window_size
