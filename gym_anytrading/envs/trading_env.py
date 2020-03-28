@@ -31,6 +31,7 @@ class TradingEnv(gym.Env):
         self.trials = 10
         self.window_size = window_size
         self.prices, self.signal_features = self._process_data()
+        self.signal_features = self.prices
         self.shape = (window_size, self.signal_features.shape[1])
 
         # spaces
