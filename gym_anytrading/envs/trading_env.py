@@ -25,7 +25,7 @@ class TradingEnv(gym.Env):
 
     def __init__(self, df, window_size):
         assert df.ndim == 2
-
+        self._max_episode_steps = 100
         self.seed()
         self.df = df
         self.trials = 10
@@ -103,7 +103,7 @@ class TradingEnv(gym.Env):
 
 
     def _get_observation(self):
-        return self.signal_features[(self._current_tick-self.window_size):self._current_tick][0,:]
+        return self.signal_features[(self._current_tick-self.window_size):self._current_tick][:,0]
 
 
     def render(self, mode='human'):
