@@ -43,7 +43,7 @@ class StocksEnv(TradingEnv):
 
             if self._position == Positions.Long:
                 step_reward += price_diff
-
+        print("_calculate_reward",trade,action,self._position,step_reward)
         return step_reward
 
 
