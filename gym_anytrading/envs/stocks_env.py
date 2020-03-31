@@ -21,6 +21,7 @@ class StocksEnv(TradingEnv):
         prices[self.frame_bound[0] - self.window_size]  # validate index (TODO: Improve validation)
         prices = prices[self.frame_bound[0]-self.window_size:self.frame_bound[1]]
         print(type(prices))
+        print(prices.shape)
         raise Exception("xx")
         diff = np.insert(np.diff(prices), 0, 0)
         signal_features = np.column_stack((prices, diff))
