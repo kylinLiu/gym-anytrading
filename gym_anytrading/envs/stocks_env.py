@@ -26,6 +26,7 @@ class StocksEnv(TradingEnv):
 
 #         return prices, signal_features
         # 把计算差值改成计算涨跌幅
+        # 或者可以考虑对价格做正态分布np.log(prices)
         pct = (prices[1:] - prices[:-1]) / prices[:-1]
         pct = np.insert(pct, 0, 0)
         signal_features = np.column_stack((prices, pct))
