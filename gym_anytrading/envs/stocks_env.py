@@ -20,12 +20,15 @@ class StocksEnv(TradingEnv):
 
         prices[self.frame_bound[0] - self.window_size]  # validate index (TODO: Improve validation)
         prices = prices[self.frame_bound[0]-self.window_size:self.frame_bound[1]]
-        print(type(prices))
-        print(prices.shape)
-        raise Exception("xx")
-        diff = np.insert(np.diff(prices), 0, 0)
-        signal_features = np.column_stack((prices, diff))
 
+#         diff = np.insert(np.diff(prices), 0, 0)
+#         signal_features = np.column_stack((prices, diff))
+
+#         return prices, signal_features
+        # 把计算差值改成计算涨跌幅
+        pct = (prices[1:] - prices[:-1]) / prices[:-1]
+        pct = np.insert(pct, 0, 0)
+        signal_features = np.column_stack((prices, pct))
         return prices, signal_features
         # return prices
 
