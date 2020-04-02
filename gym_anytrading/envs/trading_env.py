@@ -88,6 +88,7 @@ class TradingEnv(gym.Env):
         self._total_reward = 0.
         self._total_profit = 1.  # unit
         self._first_rendering = True
+        print("self._current_tick - self.window_size", self._current_tick, self.window_size)
         return self._get_observation()
 
     def step(self, action):
@@ -178,7 +179,6 @@ class TradingEnv(gym.Env):
 
         plt.pause(0.01)
 
-
     def render_all(self, mode='human'):
         window_ticks = np.arange(len(self.prices))
         plt.plot(self.prices)
@@ -188,6 +188,7 @@ class TradingEnv(gym.Env):
         hold_ticks = []
         watch_ticks = []
         # print(len(window_ticks))
+        print("window_ticks:_position_history", window_ticks, len(self._position_history))
         for i, tick in enumerate(window_ticks):
             # print(self._position_history[i], Actions.Hold)
             if self._position_history[i] == Actions.Buy.value:
