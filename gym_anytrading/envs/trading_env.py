@@ -76,8 +76,8 @@ class TradingEnv(gym.Env):
         # self._last_trade_tick = self._current_tick
         # # self._position = Positions.Short
         # self._position_history = (self.window_size * [None])
-        # # + [self._position]
-        #
+        # + [self._position]
+
 
         self._current_tick = self._start_tick
         self._last_trade_tick = self._current_tick - 1
