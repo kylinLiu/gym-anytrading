@@ -30,6 +30,7 @@ class TradingEnv(gym.Env):
     metadata = {'render.modes': ['human']}
 
     def __init__(self, df, window_size):
+        print("_init_enviroment")
         assert df.ndim == 2
         self._max_episode_steps = 100
         self.seed()
@@ -84,6 +85,7 @@ class TradingEnv(gym.Env):
         # self._position = Positions.Short
         # self._position = Positions.Long
         self._position_history = (self.window_size * [None]) + [self._position]
+        print("_position_history", self._position_history)
 
         self._total_reward = 0.
         self._total_profit = 1.  # unit
