@@ -54,6 +54,7 @@ class TradingEnv(gym.Env):
         self._current_tick = None
         self._last_trade_tick = None
         self._position = None
+        self._action = None
         self._position_history = None
         self._total_reward = None
         self._total_profit = None
@@ -71,11 +72,11 @@ class TradingEnv(gym.Env):
         self.pre_info = None
         self.buy_queue = queue.LifoQueue()
         self._done = False
-        self._current_tick = self._start_tick
-        self._last_trade_tick = self._current_tick - 1
+        self._current_tick = self._start_tick - 1
+        self._last_trade_tick = self._current_tick
         # self._position = Positions.Short
-        # self._position = Positions.Long
-        self._position_history = (self.window_size * [None]) + [self._position]
+        self._position_history = (self.window_size * [None])
+        # + [self._position]
         self._total_reward = 0.
         self._total_profit = 1.  # unit
         self._first_rendering = True
@@ -121,8 +122,7 @@ class TradingEnv(gym.Env):
             self.buy_queue.put(self._last_trade_tick)
             trade = True
 
-
-        self._position_history.append(self._position)
+        self._position_history.append(action)
         observation = self._get_observation()
         info = dict(
             total_reward=self._total_reward,
