@@ -46,10 +46,12 @@ class StocksEnv(TradingEnv):
             current_price = self.prices[self._current_tick]
             _last_buy_tick = self.buy_queue.get(timeout=1)
             last_trade_price = self.prices[_last_buy_tick]
-            price_diff = current_price - last_trade_price
+            # price_diff = current_price - last_trade_price
+            # 修改收益为涨跌幅，而不是用差价
+            price_pct = (current_price - last_trade_price) / last_trade_price
 
             # if self._position == Positions.Long:
-            step_reward += price_diff
+            step_reward += price_pct
 
             # print("calcu step_reward ", self._current_tick, self._last_trade_tick, step_reward)
         return step_reward
@@ -71,7 +73,6 @@ class StocksEnv(TradingEnv):
             # # if self._position == Positions.Long:
             # shares = (self._total_profit * (1 - self.trade_fee_ask_percent)) / last_trade_price
             # self._total_profit = (shares * (1 - self.trade_fee_bid_percent)) * current_price
-
 
     def max_possible_profit(self):
         current_tick = self._start_tick
