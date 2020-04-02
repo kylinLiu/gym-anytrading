@@ -85,6 +85,8 @@ class TradingEnv(gym.Env):
         # self._position = Positions.Short
         # self._position = Positions.Long
         self._position_history = (self.window_size * [None]) + [self._position]
+
+        print("id", self)
         print("_position_history", self._position_history)
 
         self._total_reward = 0.
