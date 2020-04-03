@@ -3,7 +3,6 @@ from copy import deepcopy
 
 from . import datasets
 
-
 register(
     id='forex-v0',
     entry_point='gym_anytrading.envs:ForexEnv',
