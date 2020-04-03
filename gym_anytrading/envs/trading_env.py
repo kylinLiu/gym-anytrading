@@ -63,7 +63,9 @@ class TradingEnv(gym.Env):
         self._first_rendering = None
 
     def update_df(self, fn):
+        '''更新df'''
         self.df = fn(self.df)
+        self.prices, self.signal_features = self._process_data()
 
     def seed(self, seed=None):
         self.np_random, seed = seeding.np_random(seed)
