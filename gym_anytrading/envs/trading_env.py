@@ -192,6 +192,7 @@ class TradingEnv(gym.Env):
         hold_ticks = []
         watch_ticks = []
         # print(len(window_ticks))
+        print(self._position_history)
         print("window_ticks:_position_history", window_ticks, len(self._position_history))
         for i, tick in enumerate(window_ticks):
             # print(self._position_history[i], Actions.Hold)
@@ -206,8 +207,8 @@ class TradingEnv(gym.Env):
 
         plt.plot(buy_ticks, self.prices[buy_ticks], 'ro')
         plt.plot(sell_ticks, self.prices[sell_ticks], 'go')
-        plt.plot(hold_ticks, self.prices[hold_ticks], 'bo')
-        plt.plot(watch_ticks, self.prices[watch_ticks], 'yo')
+        # plt.plot(hold_ticks, self.prices[hold_ticks], 'bo')
+        # plt.plot(watch_ticks, self.prices[watch_ticks], 'yo')
 
         plt.suptitle(
             "Total Reward: %.6f" % self._total_reward + ' ~ ' +
