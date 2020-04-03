@@ -52,7 +52,7 @@ class TradingEnv(gym.Env):
         # episode
         self._start_tick = self.window_size
         self._end_tick = len(self.prices) - 1
-        print("len self._end_tick",len(self._end_tick))
+        print("len self._end_tick",self._end_tick)
         self._done = None
         self._current_tick = None
         self._last_trade_tick = None
@@ -74,6 +74,7 @@ class TradingEnv(gym.Env):
         self.action_space = spaces.Discrete(len(Actions))
         self.observation_space = spaces.Box(low=-np.inf, high=np.inf, shape=self.shape, dtype=np.float32)
         print("observation_space", self.shape)
+        self._end_tick = len(self.prices) - 1
 
     def seed(self, seed=None):
         self.np_random, seed = seeding.np_random(seed)
