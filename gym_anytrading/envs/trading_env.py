@@ -97,7 +97,8 @@ class TradingEnv(gym.Env):
         self._last_trade_tick = self._current_tick - 1
         # self._position = Positions.Short
         # self._position = Positions.Long
-        self._position_history = (self.window_size * [None]) + [self._position]
+        # self._position_history = (self.window_size * [None]) + [self._position]
+        self._position_history = (self.window_size * [None])
 
         print("id", self)
         print("_position_history", self._position_history)
@@ -132,6 +133,7 @@ class TradingEnv(gym.Env):
 
         self._action = action
         self._done = False
+        self._last_trade_tick = self._current_tick
         self._current_tick += 1
 
         if self._current_tick == self._end_tick:
@@ -144,7 +146,6 @@ class TradingEnv(gym.Env):
 
         trade = False
         if action == Actions.Buy.value:
-            self._last_trade_tick = self._current_tick
             self.buy_queue.put(self._last_trade_tick)
             trade = True
 
