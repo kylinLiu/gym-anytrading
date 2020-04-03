@@ -35,6 +35,7 @@ class TradingEnv(gym.Env):
         self._max_episode_steps = 100
         self.seed()
         self.df = df
+        print(df.shape)
         self.trials = 10
         self.window_size = window_size
         self.prices, self.signal_features = self._process_data()
@@ -60,6 +61,9 @@ class TradingEnv(gym.Env):
         self._total_reward = None
         self._total_profit = None
         self._first_rendering = None
+
+    def update_df(self, fn):
+        self.df = fn(self.df)
 
     def seed(self, seed=None):
         self.np_random, seed = seeding.np_random(seed)
