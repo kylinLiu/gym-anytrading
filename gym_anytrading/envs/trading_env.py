@@ -52,6 +52,7 @@ class TradingEnv(gym.Env):
         # episode
         self._start_tick = self.window_size
         self._end_tick = len(self.prices) - 1
+        print("len self._end_tick",len(self._end_tick))
         self._done = None
         self._current_tick = None
         self._last_trade_tick = None
