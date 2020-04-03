@@ -52,10 +52,10 @@ class TradingEnv(gym.Env):
         # episode
         self._start_tick = self.window_size
         self._end_tick = len(self.prices) - 1
-        print("len self._end_tick",self._end_tick)
+        print("len self._end_tick", self._end_tick)
         self._done = None
         self._current_tick = None
-        self._last_trade_tick = None
+        # self._last_trade_tick = None
         self._position = None
         self._action = None
         self._position_history = None
@@ -96,11 +96,11 @@ class TradingEnv(gym.Env):
 
 
         self._current_tick = self._start_tick
-        self._last_trade_tick = self._current_tick - 1
+        # self._last_trade_tick = self._current_tick - 1
         # self._position = Positions.Short
         # self._position = Positions.Long
         # self._position_history = (self.window_size * [None]) + [self._position]
-        self._position_history = (self.window_size * [None])
+        self._position_history = ((self.window_size - 1) * [None])
 
         print("id", self)
         print("_position_history", self._position_history)
@@ -135,10 +135,9 @@ class TradingEnv(gym.Env):
 
         self._action = action
         self._done = False
-        self._last_trade_tick = self._current_tick
-        self._current_tick += 1
+        # self._last_trade_tick = self._current_tick
 
-        if self._current_tick - 1 == self._end_tick:
+        if self._current_tick == self._end_tick:
             self._done = True
 
         step_reward = self._calculate_reward(action)
@@ -148,10 +147,11 @@ class TradingEnv(gym.Env):
 
         trade = False
         if action == Actions.Buy.value:
-            self.buy_queue.put(self._last_trade_tick)
+            self.buy_queue.put(self._current_tick)
             trade = True
 
         self._position_history.append(action)
+        self._current_tick += 1
         observation = self._get_observation()
         info = dict(
             total_reward=self._total_reward,
@@ -162,6 +162,7 @@ class TradingEnv(gym.Env):
         self.pre_step_reward = step_reward
         self.pre_done = self._done
         self.pre_info = info
+
         return observation, step_reward, self._done, info
 
     def _get_observation(self):

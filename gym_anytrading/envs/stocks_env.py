@@ -43,7 +43,7 @@ class StocksEnv(TradingEnv):
         #     trade = True
 
         if action == Actions.Sell.value:
-            current_price = self.prices[self._current_tick - 1]
+            current_price = self.prices[self._current_tick]
             _last_buy_tick = self.buy_queue.get(timeout=1)
             last_trade_price = self.prices[_last_buy_tick]
             price_diff = current_price - last_trade_price
@@ -66,7 +66,7 @@ class StocksEnv(TradingEnv):
         # if trade or self._done:
         # print(len(self.prices), self._current_tick)
 
-        current_price = self.prices[self._current_tick-1]
+        current_price = self.prices[self._current_tick]
         if (action == Actions.Sell.value) or (action == Actions.Buy.value):
             self._total_profit += current_price * self.trade_fee_percent
             # current_price = self.prices[self._current_tick]
