@@ -51,7 +51,7 @@ class StocksEnv(TradingEnv):
             price_pct = (current_price - last_trade_price) / last_trade_price
 
             # if self._position == Positions.Long:
-            step_reward += price_diff
+            step_reward += price_pct
             # print("step_reward XXXXXXXXXXXXXXXX", step_reward)
 
             # print("calcu step_reward ", self._current_tick, self._last_trade_tick, step_reward)
