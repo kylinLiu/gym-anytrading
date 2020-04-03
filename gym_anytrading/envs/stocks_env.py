@@ -41,7 +41,7 @@ class StocksEnv(TradingEnv):
         #         (action == Actions.Sell.value) or
         #         (action == Actions.Hold.value)):
         #     trade = True
-
+        print("action", action)
         if action == Actions.Sell.value:
             current_price = self.prices[self._current_tick]
             _last_buy_tick = self.buy_queue.get(timeout=1)
