@@ -66,6 +66,13 @@ class TradingEnv(gym.Env):
         '''更新df'''
         self.df = fn(self.df)
         self.prices, self.signal_features = self._process_data()
+        self.shape = (self.window_size, self.signal_features.shape[1])
+        print("shape", self.shape)
+
+        # spaces
+        self.action_space = spaces.Discrete(len(Actions))
+        self.observation_space = spaces.Box(low=-np.inf, high=np.inf, shape=self.shape, dtype=np.float32)
+        print("observation_space", self.shape)
 
     def seed(self, seed=None):
         self.np_random, seed = seeding.np_random(seed)
