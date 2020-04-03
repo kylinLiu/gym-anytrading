@@ -64,7 +64,7 @@ class StocksEnv(TradingEnv):
         #     trade = True
 
         # if trade or self._done:
-        print(len(self.prices), self._current_tick)
+        # print(len(self.prices), self._current_tick)
 
         current_price = self.prices[self._current_tick-1]
         if (action == Actions.Sell.value) or (action == Actions.Buy.value):
