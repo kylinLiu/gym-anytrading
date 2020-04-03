@@ -136,7 +136,7 @@ class TradingEnv(gym.Env):
         self._last_trade_tick = self._current_tick
         self._current_tick += 1
 
-        if self._current_tick == self._end_tick:
+        if self._current_tick - 1 == self._end_tick:
             self._done = True
 
         step_reward = self._calculate_reward(action)
