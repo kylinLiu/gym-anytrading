@@ -145,10 +145,10 @@ class TradingEnv(gym.Env):
 
         self._update_profit(action)
 
-        trade = False
+        # trade = False
         if action == Actions.Buy.value:
             self.buy_queue.put(self._current_tick)
-            trade = True
+            # trade = True
 
         self._position_history.append(action)
         self._current_tick += 1
