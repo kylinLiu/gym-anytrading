@@ -41,7 +41,7 @@ class StocksEnv(TradingEnv):
         #         (action == Actions.Sell.value) or
         #         (action == Actions.Hold.value)):
         #     trade = True
-        print("action", action)
+        # print("action", action)
         if action == Actions.Sell.value:
             current_price = self.prices[self._current_tick]
             _last_buy_tick = self.buy_queue.get(timeout=1)
@@ -51,8 +51,8 @@ class StocksEnv(TradingEnv):
             price_pct = (current_price - last_trade_price) / last_trade_price
 
             # if self._position == Positions.Long:
-            step_reward += price_pct
-            print("step_reward XXXXXXXXXXXXXXXX", step_reward)
+            step_reward += price_diff
+            # print("step_reward XXXXXXXXXXXXXXXX", step_reward)
 
             # print("calcu step_reward ", self._current_tick, self._last_trade_tick, step_reward)
         return step_reward
