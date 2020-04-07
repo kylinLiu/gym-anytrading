@@ -4,7 +4,14 @@ from gym.utils import seeding
 import numpy as np
 from enum import Enum
 import matplotlib.pyplot as plt
-import queue
+# import queue
+from torch.multiprocessing import Queue
+
+"""
+_get_observation:pct,reward:pct episodes:50 max_score:  4.65
+                                        +50             2.95
+
+"""
 
 
 class Actions(Enum):
@@ -86,7 +93,8 @@ class TradingEnv(gym.Env):
         self.pre_step_reward = None
         self.pre_done = None
         self.pre_info = None
-        self.buy_queue = queue.LifoQueue()
+        # self.buy_queue = queue.LifoQueue()
+        self.buy_queue = Queue()
         self._done = False
         # self._current_tick = self._start_tick - 1
         # self._last_trade_tick = self._current_tick
