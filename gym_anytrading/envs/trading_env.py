@@ -4,7 +4,8 @@ from gym.utils import seeding
 import numpy as np
 from enum import Enum
 import matplotlib.pyplot as plt
-import queue
+
+# import queue
 # from torch.multiprocessing import Queue
 
 """
@@ -93,8 +94,9 @@ class TradingEnv(gym.Env):
         self.pre_step_reward = None
         self.pre_done = None
         self.pre_info = None
-        self.buy_queue = queue.LifoQueue()
+        # self.buy_queue = queue.LifoQueue()
         # self.buy_queue = Queue()
+        self.buy_queue = []
         self._done = False
         # self._current_tick = self._start_tick - 1
         # self._last_trade_tick = self._current_tick
@@ -124,21 +126,21 @@ class TradingEnv(gym.Env):
         # 措施 （目前 1 ）：
         # 1.action强制转为Hold
         # 2.直接返回状态，reward怎么计算？
-        if self.buy_queue.qsize() and action == Actions.Watch.value:
+        if self.buy_queue and action == Actions.Watch.value:
             action = Actions.Hold.value
 
         # 争议点,如果无持仓而且action是Hold,Hold为无效行为，
         # 措施 （目前 1 ）：
         # 1.action强制转为Buy
         # 2.直接返回状态，reward怎么计算？
-        if not self.buy_queue.qsize() and action == Actions.Hold.value:
+        if not self.buy_queue and action == Actions.Hold.value:
             action = Actions.Buy.value
 
         # 争议点,如果无持仓而且action是Sell,Sell为无效行为，
         # 措施 （目前 1 ）：
         # 1.action强制转为Watch
         # 2.直接返回状态，reward怎么计算？
-        if not self.buy_queue.qsize() and action == Actions.Sell.value:
+        if not self.buy_queue and action == Actions.Sell.value:
             action = Actions.Watch.value
 
         self._action = action
@@ -155,7 +157,7 @@ class TradingEnv(gym.Env):
 
         # trade = False
         if action == Actions.Buy.value:
-            self.buy_queue.put(self._current_tick)
+            self.buy_queue.append(self._current_tick)
             # trade = True
 
         self._position_history.append(action)
