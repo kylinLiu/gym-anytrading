@@ -24,7 +24,7 @@ register(
 )
 
 
-def register_new(stock_code):
+def register_new(stock_code,main_column='close'):
     dataset = datasets.load_dataset_online(stock_code)
     register(
         id='stocks-v0-{}'.format(stock_code),
@@ -32,6 +32,7 @@ def register_new(stock_code):
         kwargs={
             'df': deepcopy(dataset),
             'window_size': 30,
-            'frame_bound': (30, len(dataset))
+            'frame_bound': (30, len(dataset)),
+            'main_column': main_column,
         }
     )

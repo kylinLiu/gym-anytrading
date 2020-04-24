@@ -37,7 +37,7 @@ class Actions(Enum):
 class TradingEnv(gym.Env):
     metadata = {'render.modes': ['human']}
 
-    def __init__(self, df, window_size):
+    def __init__(self, df, window_size, main_column='Close'):
         print("_init_enviroment")
         assert df.ndim == 2
         self._max_episode_steps = 100
@@ -46,6 +46,7 @@ class TradingEnv(gym.Env):
         print(df.shape)
         self.trials = 10
         self.window_size = window_size
+        self.main_column = main_column
         self.prices, self.signal_features = self._process_data()
         # print("signal_features", self.signal_features)
         # print("signal_features_shape", self.signal_features.shape)

@@ -16,7 +16,7 @@ class StocksEnv(TradingEnv):
         self.trade_fee_percent = 0.0005
 
     def _process_data(self):
-        prices = self.df.loc[:, 'Close'].to_numpy()
+        prices = self.df.loc[:, self.main_column].to_numpy()
 
         prices[self.frame_bound[0] - self.window_size]  # validate index (TODO: Improve validation)
         prices = prices[self.frame_bound[0] - self.window_size:self.frame_bound[1]]

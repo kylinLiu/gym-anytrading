@@ -5,7 +5,6 @@ from .trading_env import TradingEnv, Actions
 
 
 class ForexEnv(TradingEnv):
-
     def __init__(self, df, window_size, frame_bound, unit_side='left'):
         assert len(frame_bound) == 2
         assert unit_side.lower() in ['left', 'right']
@@ -16,25 +15,23 @@ class ForexEnv(TradingEnv):
 
         self.trade_fee = 0.0003  # unit
 
-
     def _process_data(self):
-        prices = self.df.loc[:, 'Close'].to_numpy()
+        prices = self.df.loc[:, self.main_column].to_numpy()
 
         prices[self.frame_bound[0] - self.window_size]  # validate index (TODO: Improve validation)
-        prices = prices[self.frame_bound[0]-self.window_size:self.frame_bound[1]]
+        prices = prices[self.frame_bound[0] - self.window_size:self.frame_bound[1]]
 
         diff = np.insert(np.diff(prices), 0, 0)
         signal_features = np.column_stack((prices, diff))
 
         return prices, signal_features
 
-
     def _calculate_reward(self, action):
         step_reward = 0  # pip
 
         trade = False
         if ((action == Actions.Buy.value and self._position == Positions.Short) or
-            (action == Actions.Sell.value and self._position == Positions.Long)):
+                (action == Actions.Sell.value and self._position == Positions.Long)):
             trade = True
 
         if trade:
@@ -49,11 +46,10 @@ class ForexEnv(TradingEnv):
 
         return step_reward
 
-
     def _update_profit(self, action):
         trade = False
         if ((action == Actions.Buy.value and self._position == Positions.Short) or
-            (action == Actions.Sell.value and self._position == Positions.Long)):
+                (action == Actions.Sell.value and self._position == Positions.Long)):
             trade = True
 
         if trade or self._done:
@@ -70,7 +66,6 @@ class ForexEnv(TradingEnv):
                     quantity = self._total_profit / last_trade_price
                     self._total_profit = quantity * (current_price - self.trade_fee)
 
-
     def max_possible_profit(self):
         current_tick = self._start_tick
         last_trade_tick = current_tick - 1
@@ -80,12 +75,12 @@ class ForexEnv(TradingEnv):
             position = None
             if self.prices[current_tick] < self.prices[current_tick - 1]:
                 while (current_tick <= self._end_tick and
-                       self.prices[current_tick] < self.prices[current_tick - 1]):
+                               self.prices[current_tick] < self.prices[current_tick - 1]):
                     current_tick += 1
                 position = Positions.Short
             else:
                 while (current_tick <= self._end_tick and
-                       self.prices[current_tick] >= self.prices[current_tick - 1]):
+                               self.prices[current_tick] >= self.prices[current_tick - 1]):
                     current_tick += 1
                 position = Positions.Long
 
