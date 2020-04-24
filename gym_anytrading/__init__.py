@@ -26,8 +26,10 @@ register(
 
 def register_new(stock_code,main_column='close'):
     dataset = datasets.load_dataset_online(stock_code)
+    env_id = 'stocks-v0-{}'.format(stock_code)
+    print(env_id)
     register(
-        id='stocks-v0-{}'.format(stock_code),
+        id=env_id,
         entry_point='gym_anytrading.envs:StocksEnv',
         kwargs={
             'df': deepcopy(dataset),
