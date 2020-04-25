@@ -26,7 +26,8 @@ register(
 
 def register_new(stock_code,main_column='close'):
     dataset = datasets.load_dataset_online(stock_code)
-    env_id = 'stocks-v0-{}'.format(stock_code)
+    # env_id = 'stocks-v1'.format(stock_code)
+    env_id = 'stocks-v1'
     print(env_id)
     register(
         id=env_id,
