@@ -46,7 +46,7 @@ class TradingEnv(gym.Env):
         print(df.shape)
         self.trials = 10
         self.window_size = window_size
-        self.main_column = 'Close'
+        self.main_column = 'close'
         self.prices, self.signal_features = self._process_data()
         # print("signal_features", self.signal_features)
         # print("signal_features_shape", self.signal_features.shape)
