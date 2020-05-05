@@ -36,6 +36,6 @@ def register_new(stock_code,main_column='close'):
             'df': deepcopy(dataset),
             'window_size': 30,
             'frame_bound': (30, len(dataset)),
-            'main_column': main_column,
+            # 'main_column': main_column,
         }
     )
