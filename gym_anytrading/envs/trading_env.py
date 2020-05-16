@@ -178,7 +178,8 @@ class TradingEnv(gym.Env):
 
     def _get_observation(self):
         #         return self.signal_features[(self._current_tick-self.window_size):self._current_tick][:,0]
-        return self.signal_features[(self._current_tick - self.window_size):self._current_tick][:, 1]
+        # return self.signal_features[(self._current_tick - self.window_size):self._current_tick][:, 1]
+        return self.signal_features[(self._current_tick - self.window_size):self._current_tick]
 
     def render(self, mode='human'):
 
