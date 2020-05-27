@@ -1,6 +1,7 @@
 import os
 import baostock as bs
 import pandas as pd
+import datetime
 
 
 def load_dataset(name, index_name):
@@ -37,7 +38,7 @@ def load_dataset_online(stock_code, csv_filename='', index_name='date', file_fir
     rs = bs.query_history_k_data_plus(
         stock_code,
         "date,code,open,high,low,close,preclose,volume,amount,adjustflag,turn,tradestatus,pctChg,isST",
-        start_date='2017-07-01', end_date='2017-12-31',
+        start_date='2017-01-01', end_date=datetime.datetime.now().strftime("%Y-%m-%d"),
         frequency="d", adjustflag="3"
     )
     print('query_history_k_data_plus respond error_code:' + rs.error_code)
