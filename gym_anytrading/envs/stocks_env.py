@@ -1,3 +1,4 @@
+import pandas as pd
 import numpy as np
 
 # from .trading_env import TradingEnv, Actions, Positions
@@ -48,7 +49,9 @@ class StocksEnv(TradingEnv):
         # pct = (prices[1:] - prices[:-1]) / prices[:-1]
         # pct = np.insert(pct, 0, 0)
         # signal_features = np.column_stack((prices, pct))
-        signal_features = self.df.loc[:, column_list].to_numpy(dtype='float')
+        # signal_features = self.df.loc[:, column_list].to_numpy(dtype='float')
+
+        signal_features = pd.DataFrame(signal_features, dtype=np.float).to_numpy(dtype='float')
         signal_features = signal_features[self.frame_bound[0] - self.window_size:self.frame_bound[1]]
         return prices, signal_features
         # return prices
