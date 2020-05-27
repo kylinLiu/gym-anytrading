@@ -20,6 +20,7 @@ class StocksEnv(TradingEnv):
         #     prices = self.df.loc[:, self.main_column].to_numpy(dtype = 'float')
         #
         #     prices[self.frame_bound[0] - self.window_size]  # validate index (TODO: Improve validation)
+
         #     prices = prices[self.frame_bound[0] - self.window_size:self.frame_bound[1]]
         #
         #     #         diff = np.insert(np.diff(prices), 0, 0)
@@ -49,8 +50,7 @@ class StocksEnv(TradingEnv):
         # pct = (prices[1:] - prices[:-1]) / prices[:-1]
         # pct = np.insert(pct, 0, 0)
         # signal_features = np.column_stack((prices, pct))
-        # signal_features = self.df.loc[:, column_list].to_numpy(dtype='float')
-
+        signal_features = self.df.loc[:, column_list]
         signal_features = pd.DataFrame(signal_features, dtype=np.float).to_numpy(dtype='float')
         signal_features = signal_features[self.frame_bound[0] - self.window_size:self.frame_bound[1]]
         return prices, signal_features
