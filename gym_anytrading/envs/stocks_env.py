@@ -15,10 +15,28 @@ class StocksEnv(TradingEnv):
         # self.trade_fee_ask_percent = 0.005  # unit
         self.trade_fee_percent = 0.0005
 
-    def _process_data(self):
-        prices = self.df.loc[:, self.main_column].to_numpy(dtype = 'float')
+        # def _process_data(self):
+        #     prices = self.df.loc[:, self.main_column].to_numpy(dtype = 'float')
+        #
+        #     prices[self.frame_bound[0] - self.window_size]  # validate index (TODO: Improve validation)
+        #     prices = prices[self.frame_bound[0] - self.window_size:self.frame_bound[1]]
+        #
+        #     #         diff = np.insert(np.diff(prices), 0, 0)
+        #     #         signal_features = np.column_stack((prices, diff))
+        #
+        #     #         return prices, signal_features
+        #     # 把计算差值改成计算涨跌幅
+        #     # 或者可以考虑对价格做正态分布np.log(prices)
+        #     pct = (prices[1:] - prices[:-1]) / prices[:-1]
+        #     pct = np.insert(pct, 0, 0)
+        #     signal_features = np.column_stack((prices, pct))
+        #     return prices, signal_features
+        # return prices
 
-        prices[self.frame_bound[0] - self.window_size]  # validate index (TODO: Improve validation)
+    def _process_data(self, column_list):
+        prices = self.df.loc[:, self.main_column].to_numpy(dtype='float')
+
+        # prices[self.frame_bound[0] - self.window_size]  # validate index (TODO: Improve validation)
         prices = prices[self.frame_bound[0] - self.window_size:self.frame_bound[1]]
 
         #         diff = np.insert(np.diff(prices), 0, 0)
@@ -27,9 +45,11 @@ class StocksEnv(TradingEnv):
         #         return prices, signal_features
         # 把计算差值改成计算涨跌幅
         # 或者可以考虑对价格做正态分布np.log(prices)
-        pct = (prices[1:] - prices[:-1]) / prices[:-1]
-        pct = np.insert(pct, 0, 0)
-        signal_features = np.column_stack((prices, pct))
+        # pct = (prices[1:] - prices[:-1]) / prices[:-1]
+        # pct = np.insert(pct, 0, 0)
+        # signal_features = np.column_stack((prices, pct))
+        signal_features = self.df.loc[:, column_list].to_numpy(dtype='float')
+        signal_features = signal_features[self.frame_bound[0] - self.window_size:self.frame_bound[1]]
         return prices, signal_features
         # return prices
 

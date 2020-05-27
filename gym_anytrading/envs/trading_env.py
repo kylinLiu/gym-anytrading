@@ -72,10 +72,11 @@ class TradingEnv(gym.Env):
         self._total_profit = None
         self._first_rendering = None
 
-    def update_df(self, fn):
+    def update_df(self, fn=None, column_list=None):
         '''更新df'''
-        self.df = fn(self.df)
-        self.prices, self.signal_features = self._process_data()
+        if fn:
+            self.df = fn(self.df)
+        self.prices, self.signal_features = self._process_data(column_list)
         self.shape = (self.window_size, self.signal_features.shape[1])
         print("shape", self.shape)
 
@@ -180,9 +181,9 @@ class TradingEnv(gym.Env):
         #         return self.signal_features[(self._current_tick-self.window_size):self._current_tick][:,0]
         # print((self.signal_features[(self._current_tick - self.window_size):self._current_tick][:, 1]).shape)
         # print((self.signal_features[(self._current_tick - self.window_size):self._current_tick]).shape)
-        # print((self.signal_features[(self._current_tick - self.window_size):self._current_tick]).reshape(1,-1).shape)
-        # print((self.signal_features[(self._current_tick - self.window_size):self._current_tick]).reshape(-1,1).shape)
-        return self.signal_features[(self._current_tick - self.window_size):self._current_tick].reshape(-1,1)[:, 0]
+        # print((self.signal_features[(self._current_tick - self.window_size):self._current_tick]).reshape(1, -1).shape)
+        # print((self.signal_features[(self._current_tick - self.window_size):self._current_tick]).reshape(-1, 1).shape)
+        return self.signal_features[(self._current_tick - self.window_size):self._current_tick].reshape(-1, 1)[:, ]
 
     def render(self, mode='human'):
 
@@ -253,7 +254,7 @@ class TradingEnv(gym.Env):
     def pause_rendering(self):
         plt.show()
 
-    def _process_data(self):
+    def _process_data(self, column_list):
         raise NotImplementedError
 
     def _calculate_reward(self, action):
