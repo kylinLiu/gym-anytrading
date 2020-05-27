@@ -37,7 +37,7 @@ def load_dataset_online(stock_code, csv_filename='', index_name='date', file_fir
     # 分钟线指标：date,time,code,open,high,low,close,volume,amount,adjustflag
     rs = bs.query_history_k_data_plus(
         stock_code,
-        "date,code,open,high,low,close,preclose,volume,amount,adjustflag,turn,tradestatus,pctChg,isST",
+        "date,code,open,high,low,close,preclose,volume,amount,adjustflag,turn,tradestatus,pctChg,peTTM,pbMRQ,psTTM,pcfNcfTTM,isST",
         start_date='2017-01-01', end_date=datetime.datetime.now().strftime("%Y-%m-%d"),
         frequency="d", adjustflag="3"
     )
