@@ -183,7 +183,8 @@ class TradingEnv(gym.Env):
         # print((self.signal_features[(self._current_tick - self.window_size):self._current_tick]).shape)
         # print((self.signal_features[(self._current_tick - self.window_size):self._current_tick]).reshape(1, -1).shape)
         # print((self.signal_features[(self._current_tick - self.window_size):self._current_tick]).reshape(-1, 1).shape)
-        return self.signal_features[(self._current_tick - self.window_size):self._current_tick].reshape(-1, 1)[:, ]
+        # return self.signal_features[(self._current_tick - self.window_size):self._current_tick].reshape(-1, 1)[:, ]
+        return self.signal_features[(self._current_tick - self.window_size):self._current_tick].reshape(-1)
 
     def render(self, mode='human'):
 

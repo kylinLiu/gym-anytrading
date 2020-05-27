@@ -60,3 +60,11 @@ def load_dataset_online(stock_code, csv_filename='', index_name='date', file_fir
     #### 登出系统 ####
     bs.logout()
     return result
+
+
+if __name__ == "__main__":
+    result = load_dataset_online("sz.000001")
+    a = result.loc[:, "close"].to_numpy(dtype='float')
+    # b = result.loc[:, ["close"]].to_numpy(dtype='float')
+    b = result.loc[:, ["close", "pctChg"]].to_numpy(dtype='float').reshape(-1)
+    print(a.shape, b.shape)
