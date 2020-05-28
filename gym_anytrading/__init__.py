@@ -1,7 +1,7 @@
 from gym.envs.registration import register
 from copy import deepcopy
-
 from . import datasets
+import datetime
 
 register(
     id='forex-v0',
@@ -24,8 +24,12 @@ register(
 )
 
 
-def register_new(stock_code,main_column='close'):
-    dataset = datasets.load_dataset_online(stock_code)
+def register_new(
+        stock_code,
+        start_date='2017-01-01',
+        end_date=datetime.datetime.now().strftime("%Y-%m-%d")
+):
+    dataset = datasets.load_dataset_online(stock_code,start_date=start_date,end_date=end_date)
     # env_id = 'stocks-v1'.format(stock_code)
     env_id = 'stocks-v1'
     print(env_id)

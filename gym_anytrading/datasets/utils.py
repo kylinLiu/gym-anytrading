@@ -2,6 +2,7 @@ import os
 import baostock as bs
 import pandas as pd
 import datetime
+import numpy as np
 
 
 def load_dataset(name, index_name):
@@ -10,7 +11,14 @@ def load_dataset(name, index_name):
     return pd.read_csv(path, index_col=index_name)
 
 
-def load_dataset_online(stock_code, csv_filename='', index_name='date', file_first=False):
+def load_dataset_online(
+        stock_code,
+        csv_filename='',
+        index_name='date',
+        file_first=False,
+        start_date='2017-01-01',
+        end_date=datetime.datetime.now().strftime("%Y-%m-%d")
+):
     '''
 
     :param stock_code: eg:'sz.000001'
@@ -38,7 +46,7 @@ def load_dataset_online(stock_code, csv_filename='', index_name='date', file_fir
     rs = bs.query_history_k_data_plus(
         stock_code,
         "date,code,open,high,low,close,preclose,volume,amount,adjustflag,turn,tradestatus,pctChg,peTTM,pbMRQ,psTTM,pcfNcfTTM,isST",
-        start_date='2017-01-01', end_date=datetime.datetime.now().strftime("%Y-%m-%d"),
+        start_date=start_date, end_date=end_date,
         frequency="d", adjustflag="3"
     )
     print('query_history_k_data_plus respond error_code:' + rs.error_code)
@@ -63,8 +71,16 @@ def load_dataset_online(stock_code, csv_filename='', index_name='date', file_fir
 
 
 if __name__ == "__main__":
-    result = load_dataset_online("sz.000001")
+    result = load_dataset_online("sz.000002")
     a = result.loc[:, "close"].to_numpy(dtype='float')
     # b = result.loc[:, ["close"]].to_numpy(dtype='float')
-    b = result.loc[:, ["close", "pctChg"]].to_numpy(dtype='float').reshape(-1)
+    b = result.loc[:, ["close", "pctChg"]].apply(pd.to_numeric, errors='coerce').fillna(0.0).to_numpy(
+        dtype='float').reshape(-1)
+    # print(.convert_objects(convert_numeric=True))
+    # xx = result.loc[:, ["pctChg", "turn"]]
+    # xx = pd.DataFrame(xx, dtype=np.float)
+    # print(xx.info())
+    # print(result["pctChg"].dtype)
+    # print(result.loc[:, "turn"].dtype)
+    # print(result.info())
     print(a.shape, b.shape)
