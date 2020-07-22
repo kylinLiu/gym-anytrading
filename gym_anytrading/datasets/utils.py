@@ -4,6 +4,7 @@ import pandas as pd
 import datetime
 import numpy as np
 import requests
+import json
 
 
 def load_dataset(name, index_name):
@@ -108,6 +109,8 @@ def get_kzz_miniute(symbol):
     # """
     r = requests.get(url, headers=headers)
     datas = r.text
+    datas = json.loads(datas)
+    datas = datas.get("data", {}).get("item", [])
     data_list = []
     for index, row in enumerate(datas):
         close_diff = None
