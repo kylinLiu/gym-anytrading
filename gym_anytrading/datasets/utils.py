@@ -259,7 +259,7 @@ def get_kzz_miniute(symbol):
             buy_list["y"].append(row["close"])
             buy_list["x"].append(index)
     df = pd.DataFrame(data_list)
-    print(df.colums)
+    print(df.columns)
     print(df)
     return df
 
