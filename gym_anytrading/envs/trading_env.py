@@ -48,6 +48,7 @@ class TradingEnv(gym.Env):
         self.window_size = window_size
         self.main_column = 'close'
         self.prices, self.signal_features = self._process_data([self.main_column])
+        # self.max_price,self.min_price = self.prices.max(),self.prices.min()
         # print("signal_features", self.signal_features)
         # print("signal_features_shape", self.signal_features.shape)
         self.shape = (window_size, self.signal_features.shape[1])
@@ -77,6 +78,7 @@ class TradingEnv(gym.Env):
         if fn:
             self.df = fn(self.df)
         self.prices, self.signal_features = self._process_data(column_list)
+        # self.max_price,self.min_price = self.prices.max(),self.prices.min()
         self.shape = (self.window_size, self.signal_features.shape[1])
         print("shape", self.shape)
 

@@ -1,5 +1,5 @@
 from .utils import load_dataset as _load_dataset
-from .utils import load_dataset_online
+from .utils import load_dataset_online,get_kzz_miniute
 
 
 # Load FOREX datasets
