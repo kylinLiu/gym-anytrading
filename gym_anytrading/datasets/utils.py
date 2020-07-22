@@ -113,9 +113,9 @@ def get_kzz_miniute(symbol):
     datas = datas.get("data", {}).get("item", [])
     data_list = []
     for index, row in enumerate(datas):
-        close_diff = None
-        volumn_diff = None
-        volumn_chng = None
+        close_diff = 0
+        volumn_diff = 0
+        volumn_chng = 0
         if index:
             close_diff = row[5] - datas[index - 1][5]
             volumn_diff = row[1] - datas[index - 1][1]
