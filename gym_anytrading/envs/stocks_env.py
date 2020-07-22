@@ -54,7 +54,7 @@ class StocksEnv(TradingEnv):
             signal_features = self.df.loc[:, column_list].apply(pd.to_numeric, errors='coerce').fillna(0.0).to_numpy(
                 dtype='float')
         else:
-            self.df.apply(pd.to_numeric, errors='coerce').fillna(0.0).to_numpy(
+            signal_features = self.df.apply(pd.to_numeric, errors='coerce').fillna(0.0).to_numpy(
                 dtype='float')
         # signal_features = pd.DataFrame(signal_features, dtype=np.float)
         signal_features = signal_features[self.frame_bound[0] - self.window_size:self.frame_bound[1]]
