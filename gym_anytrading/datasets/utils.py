@@ -128,7 +128,6 @@ def get_kzz_miniute(symbol):
                 "volumn_diff": volumn_diff,
                 "volumn_chng": volumn_chng,
                 "close": row[5],
-                "volumne": row[1],
                 "chg": row[6],
                 "date": datetime.datetime.fromtimestamp(row[0] / 1000).strftime("%H:%M"),
             }
