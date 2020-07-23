@@ -5,6 +5,7 @@ import datetime
 import numpy as np
 import requests
 import json
+import time
 
 
 def load_dataset(name, index_name):
@@ -88,29 +89,30 @@ def get_kzz_miniute(symbol):
         'Referer': 'https://xueqiu.com/S/{}'.format(symbol),
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.81 Safari/537.36',
     }
+    all_datas = []
+    ts = int(time.time() * 1000)
+    for _ in range(10):
+        url = "https://stock.xueqiu.com/v5/stock/chart/kline.json?symbol={}&begin={}&period=1m&type=before&count=-284&indicator=kline,pe,pb,ps,pcf,market_capital,agt,ggt,balance".format(
+            symbol, ts
+        )
 
-    url = "https://stock.xueqiu.com/v5/stock/chart/kline.json?symbol={}&begin=1595561801138&period=1m&type=before&count=-284&indicator=kline,pe,pb,ps,pcf,market_capital,agt,ggt,balance".format(
-        symbol, '1594949400000')
-
-    # coding:utf-8
-    # import requests
-
-    #
-    # for url in ["https://xueqiu.com", "https://xueqiu.com/S/SH113566"]:
-    #     r = requests.get(url)
-    #     headers = r.headers
-    #     for k, v in headers.items():
-    #         print(k, v)
-    #
-    # """
-    # aliyungf_tc=AQAAAIH/+2ygvwAA9sn43s3aKjALArSJ;
-    # acw_tc=2760824b15950629200605825eb999f3e4f540d36fab5ff5d4e5e321f62866;
-    #
-    # """
-    r = requests.get(url, headers=headers)
-    datas = r.text
-    datas = json.loads(datas)
-    datas = datas.get("data", {}).get("item", [])
+        r = requests.get(url, headers=headers)
+        datas = r.text
+        datas = json.loads(datas)
+        datas = datas.get("data", {}).get("item", [])
+        ts = datas[0][0]
+        print(_)
+        if _:
+            datas = datas[:-1]
+        if not datas or (datas[0][0] == datas[-1][0]):
+            break
+        print(datas[0][0])
+        print(datas[-1][0])
+        all_datas.extend(datas[::-1])
+        time.sleep(5)
+    # print(datas)
+    # raise Exception(22)\
+    datas = all_datas[::-1]
     data_list = []
     for index, row in enumerate(datas):
         close_diff = 0
@@ -260,6 +262,7 @@ def get_kzz_miniute(symbol):
     df = pd.DataFrame(data_list)
     print(df.columns)
     print(df)
+    df.to_csv(r"drive/My Drive/l_gym/local_data/{}.csv".format(symbol))
     return df
 
 
