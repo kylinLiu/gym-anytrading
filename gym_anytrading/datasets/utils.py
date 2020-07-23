@@ -145,7 +145,8 @@ def get_kzz_miniute(symbol):
     def calcute_rsi(data_list):
         a = sum([i["close_diff"] for i in data_list if i["close_diff"] > 0])
         b = abs(sum([i["close_diff"] for i in data_list if i["close_diff"] < 0]))
-
+        if  not(a+b):
+            return 0
         rsi = a / (a + b) * 100
         return rsi
 
