@@ -83,13 +83,13 @@ def get_kzz_miniute(symbol):
         'Connection': 'keep-alive',
         'Pragma': 'no-cache',
         'Upgrade-Insecure-Requests': '1',
-        "Cookie": "xq_a_token=ad923af9f68bb6a13ada0962232589cea11925c4; xqat=ad923af9f68bb6a13ada0962232589cea11925c4; xq_r_token=cf0e6f767c2318f1f1779fcee9323365f02e1b4b; xq_id_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ1aWQiOi0xLCJpc3MiOiJ1YyIsImV4cCI6MTU5NjE2MjgxNSwiY3RtIjoxNTk1MDYyOTQ2ODk2LCJjaWQiOiJkOWQwbjRBWnVwIn0.FjdGzZN_iktMuEHXI7FSPvC5AJsPLU7B9el4df2viDkynNkefJILViljyWyjjWDY3TAzh0TAE2ZjcWFax43B5-CG_XewUULyle5ipYZDUyehY84keDH0FY-RaEzmkcJ-aJsV0is8n5IeOBxEbRND3x7NNNDjdqHepPOwxcfYAWI2KwcuSsx9NLQzGGB8iqE-GtEn7M0S3RlHAZHxpIh50vJlsjAMmUzhrd5IwxcgwfBLhpI_O2tHTKtUyBgNDCHqh_GUdYDSk-_S6FcjkfB_xD1mSJzclU1QFzsJHdjt3xwoK9N5XHwK5cRu2fat4W4EqRjAqjJa8m_2-HEefVI42g; u=811595062999370; Hm_lvt_1db88642e346389874251b5a1eded6e3=1595060107; device_id=3d677af1cbb51499f019102e60235e10; is_overseas=0; Hm_lpvt_1db88642e346389874251b5a1eded6e3=1595063449",
+        "Cookie": "device_id=24700f9f1986800ab4fcc880530dd0ed; aliyungf_tc=AQAAAFtIFAFn0AIAYdIPeQvz7T+oIHBq; acw_tc=2760820b15954752591982812ed75aa6ca31f2aa98e4d34eeb7a9eb9342eda; xq_a_token=ad923af9f68bb6a13ada0962232589cea11925c4; xqat=ad923af9f68bb6a13ada0962232589cea11925c4; xq_r_token=cf0e6f767c2318f1f1779fcee9323365f02e1b4b; xq_id_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ1aWQiOi0xLCJpc3MiOiJ1YyIsImV4cCI6MTU5NjE2MjgxNSwiY3RtIjoxNTk1NDc1MjE4MTI2LCJjaWQiOiJkOWQwbjRBWnVwIn0.VqNvedI8eRXymnP1z6MNSjYoAOVOzqIyjgnKEuBjKWzIA2oFPm4lYWsF_vW8zxD1UZ_h5gxgHZKJn6iTFfCp1ArstoXbIBrbXFriIWi0ZWn9KWfTozY_Xx5JDvWlHXOWUuooQlHGNYq57MqhHLQk3eutFiGxI8C_klL2ilk0_-v_DnLuborRCcCbb3oldVmLgn71DDemG_Dq5R3x6xUchMVTLhkqVUaPGJHRT1UvWQodvkC5y-lYI95SS84zURiQhtH9MUh8MPCmo9Auy0YPCJFavfUv-amySXi-zFpS5tPrkszhJpIIYYAPU7Y4I7zBFBAobGkGf6L-7_sqxHuUfw; u=261595475259203; Hm_lvt_1db88642e346389874251b5a1eded6e3=1594617430,1595225049,1595475256; is_overseas=0; Hm_lpvt_1db88642e346389874251b5a1eded6e3=1595475264",
         'Origin': 'https://xueqiu.com',
         'Referer': 'https://xueqiu.com/S/{}'.format(symbol),
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.81 Safari/537.36',
     }
 
-    url = "https://stock.xueqiu.com/v5/stock/chart/kline.json?symbol={}&begin=1595252465764&period=1m&type=before&count=-284&indicator=kline,pe,pb,ps,pcf,market_capital,agt,ggt,balance".format(
+    url = "https://stock.xueqiu.com/v5/stock/chart/kline.json?symbol={}&begin=1595561801138&period=1m&type=before&count=-284&indicator=kline,pe,pb,ps,pcf,market_capital,agt,ggt,balance".format(
         symbol, '1594949400000')
 
     # coding:utf-8
