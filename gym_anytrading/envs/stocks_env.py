@@ -117,8 +117,8 @@ class StocksEnv(TradingEnv):
         prices = self.prices[start:end]
         max_price, min_price = prices.max(), prices.min()
 
-        profile = ((max_price + min_price) - 2.0) / current_price
-        loss = (2.0 - (max_price + min_price)) / current_price
+        profile = (max_price + min_price) / current_price - 2.0
+        loss = 2.0 - (max_price + min_price) / current_price
         # 如果是买入，取前取10期，获取最低价，计算损失（应该在最低价买入）A
         # 往取后取60期，取最小值、最大值，分别算最大回测B和最大收益C（）
         # 总收益 =  (C - B - A)/current_price
