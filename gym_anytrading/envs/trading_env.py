@@ -88,6 +88,7 @@ class TradingEnv(gym.Env):
         self.observation_space = spaces.Box(low=-np.inf, high=np.inf, shape=self.shape, dtype=np.float32)
         print("observation_space", self.shape)
         self._end_tick = len(self.prices) - 1
+        self._end_tick = len(self.prices) - 1 -30
 
     def seed(self, seed=None):
         self.np_random, seed = seeding.np_random(seed)
