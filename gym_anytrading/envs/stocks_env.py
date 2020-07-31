@@ -116,10 +116,10 @@ class StocksEnv(TradingEnv):
         current_price = self.prices[self._current_tick]
         prices = self.prices[start:end]
         max_price, min_price = prices.max(), prices.min()
-        max_index = np.argwhere(prices == max_price)
-        print(max_index)
-        print(start)
-        print(self._current_tick)
+        max_index = np.argwhere(prices == max_price)[0][0]
+        # print(max_index)
+        # print(start)
+        # print(self._current_tick)
         if max_index + start > self._current_tick:
             right = 1
         else:
