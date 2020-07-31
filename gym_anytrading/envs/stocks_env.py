@@ -117,13 +117,12 @@ class StocksEnv(TradingEnv):
         prices = self.prices[start:end]
         max_price, min_price = prices.max(), prices.min()
         max_index = np.argwhere(prices == max_price)[0][0]
-        # print(max_index)
-        # print(start)
-        # print(self._current_tick)
         if max_index + start > self._current_tick:
             right = 1
         else:
             right = -1
+
+        print(max_index, start, max_index + start, self._current_tick, right)
 
         profile = ((max_price + min_price) / current_price - 2.0) * right
         loss = (2.0 - (max_price + min_price) / current_price) * right
