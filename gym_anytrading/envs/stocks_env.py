@@ -35,7 +35,7 @@ class StocksEnv(TradingEnv):
         #     return prices, signal_features
         # return prices
 
-    def _process_data(self, column_list = None):
+    def _process_data(self, column_list=None):
         prices = self.df.loc[:, self.main_column].to_numpy(dtype='float')
 
         # prices[self.frame_bound[0] - self.window_size]  # validate index (TODO: Improve validation)
@@ -116,9 +116,14 @@ class StocksEnv(TradingEnv):
         current_price = self.prices[self._current_tick]
         prices = self.prices[start:end]
         max_price, min_price = prices.max(), prices.min()
+        max_index = np.argwhere(prices == max_price)
+        if max_index + start > self._current_tick:
+            right = 1
+        else:
+            right = -1
 
-        profile = (max_price + min_price) / current_price - 2.0
-        loss = 2.0 - (max_price + min_price) / current_price
+        profile = ((max_price + min_price) / current_price - 2.0) * right
+        loss = (2.0 - (max_price + min_price) / current_price) * right
         # 如果是买入，取前取10期，获取最低价，计算损失（应该在最低价买入）A
         # 往取后取60期，取最小值、最大值，分别算最大回测B和最大收益C（）
         # 总收益 =  (C - B - A)/current_price
