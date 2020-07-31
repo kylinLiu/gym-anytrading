@@ -122,7 +122,7 @@ class StocksEnv(TradingEnv):
         else:
             right = -1
 
-        print(max_index, start, max_index + start, self._current_tick, right)
+        # print(max_index, start, max_index + start, self._current_tick, right)
 
         profile = ((max_price + min_price) / current_price - 2.0) * right
         loss = (2.0 - (max_price + min_price) / current_price) * right
