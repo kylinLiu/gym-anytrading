@@ -73,8 +73,6 @@ def load_dataset_online(
     return result
 
 
-
-
 def get_kzz_miniute(symbol):
     headers = {
         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
@@ -84,7 +82,8 @@ def get_kzz_miniute(symbol):
         'Connection': 'keep-alive',
         'Pragma': 'no-cache',
         'Upgrade-Insecure-Requests': '1',
-        "Cookie": "device_id=225ffbaa9a9242741146afd88c66fafc; xq_a_token=69a6c81b73f854a856169c9aab6cd45348ae1299; xqat=69a6c81b73f854a856169c9aab6cd45348ae1299; xq_r_token=08a169936f6c0c1b6ee5078ea407bb28f28efecf; xq_id_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ1aWQiOi0xLCJpc3MiOiJ1YyIsImV4cCI6MTU5ODMyMzAwNCwiY3RtIjoxNTk1NzUwMzg0MTY5LCJjaWQiOiJkOWQwbjRBWnVwIn0.D4oMci4NhePHMOuAY3f1tB2-yzhYjLJPDl7ukI3ypL-fsjbJs_dGLDl-1J7y7sptyCKHY58fU_s53-5DHFkZj8C6cPJeKuLLtDeT9xIPVUsQj6rnD-5iHitLzP1sKe3t0uk9IBIsyTHj0_94H0WXAfwycXg0_tQbMCY9hSObl1rZzNUV27Bt6CIEuIzgkkZiWedsWIDDq-3nPSzAa8-BwlICfYjJzmyLoYVbx7rwuncLPkt7L9MF_MoKUPFy7TLfSII_mPi4PR7oFwl2MWtV74LqoKT8ijvhEglreIW5pjMfcWgtguiljwjnVpiIE_hEy4Id_kcJvIM6hWq_hvPjFA; u=781595750415430; Hm_lvt_1db88642e346389874251b5a1eded6e3=1595178962,1595750416; is_overseas=0; Hm_lpvt_1db88642e346389874251b5a1eded6e3=1595750426",
+        # "Cookie": "device_id=225ffbaa9a9242741146afd88c66fafc; xq_a_token=69a6c81b73f854a856169c9aab6cd45348ae1299; xqat=69a6c81b73f854a856169c9aab6cd45348ae1299; xq_r_token=08a169936f6c0c1b6ee5078ea407bb28f28efecf; xq_id_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ1aWQiOi0xLCJpc3MiOiJ1YyIsImV4cCI6MTU5ODMyMzAwNCwiY3RtIjoxNTk1NzUwMzg0MTY5LCJjaWQiOiJkOWQwbjRBWnVwIn0.D4oMci4NhePHMOuAY3f1tB2-yzhYjLJPDl7ukI3ypL-fsjbJs_dGLDl-1J7y7sptyCKHY58fU_s53-5DHFkZj8C6cPJeKuLLtDeT9xIPVUsQj6rnD-5iHitLzP1sKe3t0uk9IBIsyTHj0_94H0WXAfwycXg0_tQbMCY9hSObl1rZzNUV27Bt6CIEuIzgkkZiWedsWIDDq-3nPSzAa8-BwlICfYjJzmyLoYVbx7rwuncLPkt7L9MF_MoKUPFy7TLfSII_mPi4PR7oFwl2MWtV74LqoKT8ijvhEglreIW5pjMfcWgtguiljwjnVpiIE_hEy4Id_kcJvIM6hWq_hvPjFA; u=781595750415430; Hm_lvt_1db88642e346389874251b5a1eded6e3=1595178962,1595750416; is_overseas=0; Hm_lpvt_1db88642e346389874251b5a1eded6e3=1595750426",
+        "Cookie": "device_id=225ffbaa9a9242741146afd88c66fafc; xq_a_token=69a6c81b73f854a856169c9aab6cd45348ae1299; xqat=69a6c81b73f854a856169c9aab6cd45348ae1299; xq_r_token=08a169936f6c0c1b6ee5078ea407bb28f28efecf; xq_id_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ1aWQiOi0xLCJpc3MiOiJ1YyIsImV4cCI6MTU5ODMyMzAwNCwiY3RtIjoxNTk1NzUwMzg0MTY5LCJjaWQiOiJkOWQwbjRBWnVwIn0.D4oMci4NhePHMOuAY3f1tB2-yzhYjLJPDl7ukI3ypL-fsjbJs_dGLDl-1J7y7sptyCKHY58fU_s53-5DHFkZj8C6cPJeKuLLtDeT9xIPVUsQj6rnD-5iHitLzP1sKe3t0uk9IBIsyTHj0_94H0WXAfwycXg0_tQbMCY9hSObl1rZzNUV27Bt6CIEuIzgkkZiWedsWIDDq-3nPSzAa8-BwlICfYjJzmyLoYVbx7rwuncLPkt7L9MF_MoKUPFy7TLfSII_mPi4PR7oFwl2MWtV74LqoKT8ijvhEglreIW5pjMfcWgtguiljwjnVpiIE_hEy4Id_kcJvIM6hWq_hvPjFA; u=781595750415430; Hm_lvt_1db88642e346389874251b5a1eded6e3=1595178962,1595750416; Hm_lpvt_1db88642e346389874251b5a1eded6e3=1595750426; is_overseas=0",
         'Origin': 'https://xueqiu.com',
         'Referer': 'https://xueqiu.com/S/{}'.format(symbol),
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.81 Safari/537.36',
@@ -145,7 +144,7 @@ def get_kzz_miniute(symbol):
     def calcute_rsi(data_list):
         a = sum([i["close_diff"] for i in data_list if i["close_diff"] > 0])
         b = abs(sum([i["close_diff"] for i in data_list if i["close_diff"] < 0]))
-        if  not(a+b):
+        if not (a + b):
             return 0
         rsi = a / (a + b) * 100
         return rsi
@@ -273,11 +272,5 @@ if __name__ == "__main__":
     # b = result.loc[:, ["close"]].to_numpy(dtype='float')
     b = result.loc[:, ["close", "pctChg"]].apply(pd.to_numeric, errors='coerce').fillna(0.0).to_numpy(
         dtype='float').reshape(-1)
-    # print(.convert_objects(convert_numeric=True))
-    # xx = result.loc[:, ["pctChg", "turn"]]
-    # xx = pd.DataFrame(xx, dtype=np.float)
-    # print(xx.info())
-    # print(result["pctChg"].dtype)
-    # print(result.loc[:, "turn"].dtype)
-    # print(result.info())
+
     print(a.shape, b.shape)
