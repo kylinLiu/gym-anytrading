@@ -100,22 +100,11 @@ class TradingEnv(gym.Env):
         self.pre_step_reward = None
         self.pre_done = None
         self.pre_info = None
-        # self.buy_queue = queue.LifoQueue()
-        # self.buy_queue = Queue()
         self.buy_queue = []
         self._done = False
-        # self._current_tick = self._start_tick - 1
-        # self._last_trade_tick = self._current_tick
-        # # self._position = Positions.Short
-        # self._position_history = (self.window_size * [None])
-        # + [self._position]
 
 
         self._current_tick = self._start_tick
-        # self._last_trade_tick = self._current_tick - 1
-        # self._position = Positions.Short
-        # self._position = Positions.Long
-        # self._position_history = (self.window_size * [None]) + [self._position]
         self._position_history = (self.window_size * [None])
 
         print("id", self)
@@ -128,10 +117,6 @@ class TradingEnv(gym.Env):
         return self._get_observation()
 
     def step(self, action):
-        # 争议点,如果有持仓而且action是Watch,Watch为无效行为，
-        # 措施 （目前 1 ）：
-        # 1.action强制转为Hold
-        # 2.直接返回状态，reward怎么计算？
         if self.buy_queue and action == Actions.Watch.value:
             action = Actions.Hold.value
 
@@ -182,12 +167,6 @@ class TradingEnv(gym.Env):
         return observation, step_reward, self._done, info
 
     def _get_observation(self):
-        #         return self.signal_features[(self._current_tick-self.window_size):self._current_tick][:,0]
-        # print((self.signal_features[(self._current_tick - self.window_size):self._current_tick][:, 1]).shape)
-        # print((self.signal_features[(self._current_tick - self.window_size):self._current_tick]).shape)
-        # print((self.signal_features[(self._current_tick - self.window_size):self._current_tick]).reshape(1, -1).shape)
-        # print((self.signal_features[(self._current_tick - self.window_size):self._current_tick]).reshape(-1, 1).shape)
-        # return self.signal_features[(self._current_tick - self.window_size):self._current_tick].reshape(-1, 1)[:, ]
         return self.signal_features[(self._current_tick - self.window_size):self._current_tick].reshape(-1)
 
     def render(self, mode='human'):
@@ -230,8 +209,8 @@ class TradingEnv(gym.Env):
         hold_ticks = []
         watch_ticks = []
         # print(len(window_ticks))
-        print(self._position_history)
-        print("window_ticks:_position_history", window_ticks, len(self._position_history))
+        print(self._position_history,len(self._position_history))
+        print("window_ticks:_position_history", window_ticks, len(window_ticks))
         for i, tick in enumerate(window_ticks):
             # print(self._position_history[i], Actions.Hold)
             if self._position_history[i] == Actions.Buy.value:
