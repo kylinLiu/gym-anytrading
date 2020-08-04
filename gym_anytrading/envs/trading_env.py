@@ -232,7 +232,7 @@ class TradingEnv(gym.Env):
             "Total Profit: %.6f" % self._total_profit
         )
 
-    def render_all(self, mode='human'):
+    def render_all_new(self, mode='human'):
         window_ticks = np.arange(len(self.prices))
         plt.plot(self.prices)
         # print(self._position_history)
@@ -245,6 +245,40 @@ class TradingEnv(gym.Env):
         print("window_ticks:_position_history", window_ticks[:self._end_tick + 1],
               len(window_ticks[:self._end_tick + 1]))
         for i, tick in enumerate(window_ticks[:self._end_tick + 1]):
+            # print(self._position_history[i], Actions.Hold)
+            if self._position_history[i] == Actions.Buy.value and len(sell_ticks) == len(buy_ticks):
+                buy_ticks.append(tick)
+            elif self._position_history[i] == Actions.Sell.value and len(buy_ticks) - len(sell_ticks) == 1:
+                sell_ticks.append(tick)
+            elif self._position_history[i] == Actions.Hold.value:
+                hold_ticks.append(tick)
+            elif self._position_history[i] == Actions.Watch.value:
+                watch_ticks.append(tick)
+
+        plt.plot(buy_ticks, self.prices[buy_ticks], 'ro')
+        plt.plot(sell_ticks, self.prices[sell_ticks], 'go')
+        # plt.plot(hold_ticks, self.prices[hold_ticks], 'bo')
+        # plt.plot(watch_ticks, self.prices[watch_ticks], 'yo')
+
+        plt.suptitle(
+            "Total Reward: %.6f" % self._total_reward + ' ~ ' +
+            "Total Profit: %.6f" % self._total_profit
+        )
+    def render_all(self, mode='human'):
+        self.prices = self.prices[-270:-30]
+        self._position_history = self._position_history[-240:]
+        window_ticks = np.arange(len(self.prices))
+        plt.plot(self.prices)
+        # print(self._position_history)
+        buy_ticks = []
+        sell_ticks = []
+        hold_ticks = []
+        watch_ticks = []
+        # print(len(window_ticks))
+        print(self._position_history, len(self._position_history))
+        print("window_ticks:_position_history",window_ticks,
+              len(window_ticks))
+        for i, tick in enumerate(window_ticks):
             # print(self._position_history[i], Actions.Hold)
             if self._position_history[i] == Actions.Buy.value and len(sell_ticks) == len(buy_ticks):
                 buy_ticks.append(tick)
