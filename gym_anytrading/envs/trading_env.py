@@ -210,8 +210,8 @@ class TradingEnv(gym.Env):
         watch_ticks = []
         # print(len(window_ticks))
         print(self._position_history,len(self._position_history))
-        print("window_ticks:_position_history", window_ticks, len(window_ticks))
-        for i, tick in enumerate(window_ticks):
+        print("window_ticks:_position_history", window_ticks[:self._end_tick+1], len(window_ticks[:self._end_tick+1]))
+        for i, tick in enumerate(window_ticks[:self._end_tick+1]):
             # print(self._position_history[i], Actions.Hold)
             if self._position_history[i] == Actions.Buy.value:
                 buy_ticks.append(tick)
