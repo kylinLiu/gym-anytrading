@@ -162,7 +162,7 @@ class StocksEnv(TradingEnv):
             # print("step_reward XXXXXXXXXXXXXXXX", step_reward)
 
             # print("calcu step_reward ", self._current_tick, self._last_trade_tick, step_reward)
-        return step_reward
+        return step_reward - 0.001
 
     def _update_profit(self, action):
         trade = False
